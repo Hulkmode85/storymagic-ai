@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryMagic AI — Personalized Children's Stories</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a0f;color:#e0e0e0}
+        .nav{padding:20px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a2e}
+        .logo{font-size:24px;font-weight:700;color:#f472b6}.logo span{color:#ec4899}
+        nav a{color:#9ca3af;text-decoration:none;margin-left:20px;font-size:14px}nav a:hover{color:#f472b6}
+        .nav .cta-sm{background:#ec4899;color:#fff;padding:8px 20px;border-radius:8px;font-weight:600}
+        .hero{text-align:center;padding:80px 20px 60px;max-width:800px;margin:0 auto}
+        .badge{display:inline-block;background:#ec489920;color:#f472b6;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:20px;border:1px solid #ec489940}
+        h1{font-size:48px;line-height:1.1;margin-bottom:20px;background:linear-gradient(to right,#f472b6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero p{color:#9ca3af;font-size:18px;line-height:1.6;max-width:600px;margin:0 auto 32px}
+        .cta{display:inline-block;background:linear-gradient(135deg,#ec4899,#f472b6);color:#fff;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:600;font-size:16px;transition:opacity .2s}.cta:hover{opacity:.9}
+        .cta-ghost{display:inline-block;color:#f472b6;padding:14px 24px;text-decoration:none;font-weight:500;font-size:16px}
+        .features{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto 80px;padding:0 20px}
+        .feat{background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px;text-align:center}
+        .feat .icon{font-size:36px;margin-bottom:16px}
+        .feat h3{font-size:18px;margin-bottom:8px;color:#e0e0e0}
+        .feat p{color:#9ca3af;font-size:14px;line-height:1.5}
+        .how{text-align:center;padding:60px 20px;max-width:800px;margin:0 auto}
+        .how h2{font-size:32px;margin-bottom:40px;color:#e0e0e0}
+        .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .step{padding:24px}.step .num{display:inline-block;width:36px;height:36px;line-height:36px;background:#ec4899;color:#fff;border-radius:50%;font-weight:700;margin-bottom:12px}
+        .step h3{margin-bottom:8px;font-size:16px}.step p{color:#9ca3af;font-size:14px;line-height:1.5}
+        .pricing{text-align:center;padding:80px 20px;max-width:1000px;margin:0 auto}
+        .pricing h2{font-size:32px;margin-bottom:12px}.pricing>p{color:#9ca3af;margin-bottom:40px}
+        .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .plan{background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px;text-align:center}
+        .plan.pop{border-color:#ec4899;position:relative}
+        .plan.pop::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#ec4899;color:#fff;padding:4px 16px;border-radius:12px;font-size:11px;font-weight:700}
+        .plan h3{font-size:20px;margin-bottom:8px}.plan .price{font-size:40px;font-weight:700;color:#f472b6;margin-bottom:4px}.plan .price span{font-size:16px;color:#9ca3af}
+        .plan .period{color:#9ca3af;font-size:14px;margin-bottom:20px}
+        .plan ul{list-style:none;text-align:left;margin-bottom:24px}
+        .plan li{padding:8px 0;font-size:14px;color:#d0d0d0;border-bottom:1px solid #1a1a2e}
+        .plan li::before{content:'\\2713';color:#f472b6;margin-right:8px;font-weight:700}
+        .plan .btn{display:block;padding:12px;background:#ec4899;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;transition:opacity .2s}.plan .btn:hover{opacity:.9}
+        .testimonial{text-align:center;padding:60px 20px;max-width:700px;margin:0 auto}
+        .testimonial blockquote{font-size:18px;font-style:italic;color:#d0d0d0;line-height:1.6;margin-bottom:16px}
+        .testimonial cite{color:#9ca3af;font-size:14px}
+        .ftr{text-align:center;padding:40px;border-top:1px solid #1a1a2e;color:#6b7280;font-size:13px}
+        @media(max-width:768px){.features,.plans,.steps{grid-template-columns:1fr}h1{font-size:32px}}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="logo">StoryMagic <span>AI</span></div>
+        <nav><a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="/" class="cta-sm">Try Free</a></nav>
+    </div>
+
+    <div class="hero">
+        <div class="badge">Loved by 10,000+ Parents</div>
+        <h1>Bedtime Stories Starring Your Child</h1>
+        <p>Personalized stories with your child as the hero. Age-appropriate language, meaningful lessons, and their favorite things woven into every tale.</p>
+        <a href="/" class="cta">Create a Free Story</a>
+        <a href="#pricing" class="cta-ghost">View Pricing</a>
+    </div>
+
+    <div class="features" id="features">
+        <div class="feat"><div class="icon">&#11088;</div><h3>Fully Personalized</h3><p>Your child's name, age, and favorite things become part of the story. Every tale is unique.</p></div>
+        <div class="feat"><div class="icon">&#128218;</div><h3>Age-Appropriate</h3><p>Vocabulary and themes adapted for ages 3-10. Simple for little ones, richer for older kids.</p></div>
+        <div class="feat"><div class="icon">&#128155;</div><h3>Meaningful Lessons</h3><p>Every story weaves in a moral — sharing, kindness, bravery, honesty — naturally and gently.</p></div>
+    </div>
+
+    <div class="how" id="how">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step"><div class="num">1</div><h3>Tell Us About Your Child</h3><p>Enter their name, age, favorite things, and a lesson you'd like the story to teach.</p></div>
+            <div class="step"><div class="num">2</div><h3>AI Creates the Story</h3><p>Our AI writes a unique, personalized bedtime story in seconds.</p></div>
+            <div class="step"><div class="num">3</div><h3>Read & Enjoy</h3><p>Read it aloud at bedtime. Save favorites. Create a new one every night.</p></div>
+        </div>
+    </div>
+
+    <div class="testimonial">
+        <blockquote>"My daughter asks for her StoryMagic story every night now. She loves hearing adventures with her name and her cat Whiskers in them!"</blockquote>
+        <cite>— Sarah M., parent of a 5-year-old</cite>
+    </div>
+
+    <div class="pricing" id="pricing">
+        <h2>Simple Pricing</h2>
+        <p>Start with a free story. Subscribe for nightly magic.</p>
+        <div class="plans">
+            <div class="plan">
+                <h3>Starter</h3>
+                <div class="price">$9<span>/mo</span></div>
+                <div class="period">5 stories per month</div>
+                <ul>
+                    <li>Personalized with child's name</li>
+                    <li>Choose lesson/theme</li>
+                    <li>Ages 3-10</li>
+                    <li>3 story styles</li>
+                </ul>
+                <a href="/" class="btn">Get Started</a>
+            </div>
+            <div class="plan pop">
+                <h3>Family</h3>
+                <div class="price">$19<span>/mo</span></div>
+                <div class="period">15 stories per month</div>
+                <ul>
+                    <li>Everything in Starter</li>
+                    <li>All story styles</li>
+                    <li>Include favorite things</li>
+                    <li>Short, medium & long</li>
+                    <li>Save & favorite stories</li>
+                </ul>
+                <a href="/" class="btn">Get Started</a>
+            </div>
+            <div class="plan">
+                <h3>Unlimited</h3>
+                <div class="price">$29<span>/mo</span></div>
+                <div class="period">Unlimited stories</div>
+                <ul>
+                    <li>Everything in Family</li>
+                    <li>Unlimited generations</li>
+                    <li>Multiple child profiles</li>
+                    <li>Story series / sequels</li>
+                    <li>Print-ready formatting</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="/" class="btn">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ftr">&copy; 2026 StoryMagic AI. All rights reserved.</div>
+</body>
+</html>
