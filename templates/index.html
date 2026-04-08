@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryMagic AI — Personalized Children's Stories</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+        .header{background:linear-gradient(135deg,#0a1628,#0a0a1f);border-bottom:1px solid #1a2a4e;padding:20px 40px;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:24px;font-weight:700;color:#f472b6}.logo span{color:#ec4899}
+        nav a{color:#9ca3af;text-decoration:none;margin-left:24px;font-size:14px;transition:color .2s}nav a:hover{color:#f472b6}
+        .container{max-width:900px;margin:40px auto;padding:0 20px}
+        h1{font-size:32px;text-align:center;margin-bottom:8px;background:linear-gradient(to right,#f472b6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .subtitle{text-align:center;color:#9ca3af;margin-bottom:32px;font-size:15px}
+        .form-card{background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .form-group{margin-bottom:16px}
+        label{display:block;font-size:13px;color:#9ca3af;margin-bottom:6px;font-weight:500}
+        input,select,textarea{width:100%;padding:12px 16px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:10px;color:#e0e0e0;font-size:14px;outline:none;transition:border-color .2s}
+        input:focus,select:focus,textarea:focus{border-color:#ec4899}
+        textarea{resize:vertical;min-height:80px}
+        .btn{width:100%;padding:14px;background:linear-gradient(135deg,#ec4899,#f472b6);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:opacity .2s;margin-top:8px}
+        .btn:hover{opacity:.9}.btn:disabled{opacity:.5;cursor:not-allowed}
+        .output{margin-top:24px;background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px;display:none}
+        .output h2{font-size:20px;color:#f472b6;margin-bottom:16px}
+        .output .story{white-space:pre-wrap;font-family:Georgia,serif;line-height:1.8;font-size:16px;color:#d0d0d0}
+        .copy-btn{background:#1e1e2e;color:#f472b6;border:1px solid #2a2a3e;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;margin-top:12px}.copy-btn:hover{background:#2a2a3e}
+        .spinner{display:inline-block;width:18px;height:18px;border:2px solid #fff3;border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .error{color:#f87171;margin-top:12px;font-size:14px}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">StoryMagic <span>AI</span></div>
+        <nav><a href="/docs">Pricing</a><a href="/docs">About</a></nav>
+    </div>
+    <div class="container">
+        <h1>Create Magical Bedtime Stories</h1>
+        <p class="subtitle">Personalized stories starring your child — with lessons they'll love and remember.</p>
+        <div class="form-card">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Child's Name</label>
+                    <input id="child_name" placeholder="e.g., Emma" />
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <select id="age">
+                        <option value="3">3 years old</option>
+                        <option value="4">4 years old</option>
+                        <option value="5" selected>5 years old</option>
+                        <option value="6">6 years old</option>
+                        <option value="7">7 years old</option>
+                        <option value="8">8 years old</option>
+                        <option value="9">9 years old</option>
+                        <option value="10">10 years old</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Lesson or Theme</label>
+                <input id="theme" placeholder="e.g., sharing with others, being brave, kindness to animals" />
+            </div>
+            <div class="form-group">
+                <label>Favorite Things (to include in the story)</label>
+                <textarea id="favorites" placeholder="e.g., dinosaurs, rainbows, their puppy Max, outer space"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Story Style</label>
+                    <select id="style">
+                        <option value="adventure">Adventure</option>
+                        <option value="fairy tale">Fairy Tale</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="animal story">Animal Story</option>
+                        <option value="space adventure">Space Adventure</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Story Length</label>
+                    <select id="length">
+                        <option value="short">Short (~2 min read)</option>
+                        <option value="medium" selected>Medium (~5 min read)</option>
+                        <option value="long">Long (~8 min read)</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" id="genBtn" onclick="generate()">Create Story</button>
+            <div class="error" id="error"></div>
+        </div>
+        <div class="output" id="output">
+            <h2>Your Story</h2>
+            <div class="story" id="result"></div>
+            <button class="copy-btn" onclick="copyResult()">Copy to Clipboard</button>
+        </div>
+    </div>
+    <script>
+        async function generate(){
+            const btn=document.getElementById('genBtn');
+            const name=document.getElementById('child_name').value.trim();
+            const theme=document.getElementById('theme').value.trim();
+            if(!name){document.getElementById('error').textContent="Please enter the child's name.";return}
+            if(!theme){document.getElementById('error').textContent='Please enter a lesson or theme.';return}
+            document.getElementById('error').textContent='';
+            btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Writing story...';
+            document.getElementById('output').style.display='none';
+            try{
+                const r=await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({child_name:name,age:document.getElementById('age').value,theme,favorites:document.getElementById('favorites').value,style:document.getElementById('style').value,length:document.getElementById('length').value})});
+                const d=await r.json();
+                if(d.error)throw new Error(d.error);
+                document.getElementById('result').textContent=d.story;
+                document.getElementById('output').style.display='block';
+            }catch(e){document.getElementById('error').textContent='Error: '+e.message}
+            finally{btn.disabled=false;btn.textContent='Create Story'}
+        }
+        function copyResult(){navigator.clipboard.writeText(document.getElementById('result').textContent);const b=event.target;b.textContent='Copied!';setTimeout(()=>b.textContent='Copy to Clipboard',2000)}
+    </script>
+</body>
+</html>
